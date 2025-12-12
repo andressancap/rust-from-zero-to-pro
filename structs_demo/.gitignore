@@ -1,0 +1,29 @@
+# Rust / Cargo
+/target/
+**/*.rs.bk
+**/*.rs.orig
+**/*.rs~
+
+# Cargo.lock (si es librería puedes ignorarlo, en binarios suele subirse)
+/Cargo.lock
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-project
+*.sublime-workspace
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Logs
+*.log
+
+# Ejemplos de backup o archivos temporales
+*.tmp
+*.bak
+*.backup

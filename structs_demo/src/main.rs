@@ -23,10 +23,10 @@ impl UserAccount {
     }
     fn withdraw(&mut self, amount: u64) -> Result<(), String> {
         if amount > self.balance {
-            Err(TxError::InsufficientFunds)
+            Err(String::from("InsufficientFunds"))
         } else {
             self.balance -= amount;
-            Ok(());
+            Ok(())
         }
     }
     fn info(&self) -> String {
@@ -38,7 +38,7 @@ impl UserAccount {
     fn transfer(&mut self, to: &mut UserAccount, amount: u64) -> Result<(), String>
     {
         if amount > self.balance {
-            Err(TxError::InsufficientFunds)
+            Err(String::from("InsufficientFunds"))
         } else {
             self.balance -= amount;
             to.balance += amount;
@@ -47,3 +47,23 @@ impl UserAccount {
     }
 }
 
+fn main() {
+    let mut user1 = UserAccount::new(1, String::from("user1"));
+    let mut user2 = UserAccount::new(2, String::from("user2"));
+
+    user1.deposit(1000);
+    println!("{}", user1.info());
+
+    match user1.withdraw(500) {
+        Ok(_) => println!("Withdrawal successful"),
+        Err(e) => println!("Error during withdrawal: {:?}", e),
+    }
+    println!("{}", user1.info());
+
+    match user1.transfer(&mut user2, 300) {
+        Ok(_) => println!("Transfer successful"),
+        Err(e) => println!("Error during transfer: {:?}", e),
+    }
+    println!("{}", user1.info());
+    println!("{}", user2.info());
+}
